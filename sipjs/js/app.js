@@ -4,13 +4,15 @@ var inputCallee = document.getElementById('callee')
 var btnCall = document.getElementById('btnCall')
 var localVideo = document.getElementById('localVideo')
 var remoteVideo = document.getElementById('remoteVideo')
+var btnHangup = document.getElementById('btnHangup')
+var showUser = document.getElementById('showUser')
 
 var domain = "sipjs.onsip.com"
 var localUser
 
 btnLogin.addEventListener("click", (btn, evt) => {
 
-    localUser = inputUri.value + getRandr() + '@' + domain;
+    localUser = inputUri.value + getRandr() + '@' + domain
 
     var configuration = {
         media: {
@@ -31,12 +33,41 @@ btnLogin.addEventListener("click", (btn, evt) => {
 
     var simple = new SIP.WebRTC.Simple(configuration)
 
-    simple.on('ringing', () => {
-        simple.answer()
-    })
+    simple.on('registered', () => {
 
-    btnCall.addEventListener('click', (btn,evt) => {
-        simple.call(inputCallee.value)
+        showUser.innerText = 'Logged in as ' + localUser
+        showUser.style.display = 'inline'
+        inputUri.style.display = 'none'
+        btnLogin.style.display = 'none'
+        inputCallee.style.display = 'inline'
+        btnCall.style.display = 'inline'
+
+        simple.on('ringing', () => {
+            simple.answer()
+            inputCallee.style.display = 'none'
+            btnCall.style.display = 'none'
+            btnHangup.style.display = 'inline'
+        })
+
+        simple.on('ended', () => {
+            inputCallee.style.display = 'inline'
+            btnCall.style.display = 'inline'
+            btnHangup.style.display = 'none'
+        })
+    
+        btnCall.addEventListener('click', (btn,evt) => {
+            simple.call(inputCallee.value)
+            inputCallee.style.display = 'none'
+            btnCall.style.display = 'none'
+            btnHangup.style.display = 'inline'
+        })
+    
+        btnHangup.addEventListener('click', (btn,evt) => {
+            simple.hangup()
+            inputCallee.style.display = 'inline'
+            btnCall.style.display = 'inline'
+            btnHangup.style.display = 'none'
+        })
     })
 })
 
