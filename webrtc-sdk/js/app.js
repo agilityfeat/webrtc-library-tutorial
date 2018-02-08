@@ -8,8 +8,8 @@ document.getElementById('my-number').innerHTML = number
 
 var phone = PHONE({
     number: number,
-    publish_key: 'pub-c-17febd84-2edf-456d-9ab0-72bba81bfd79',
-    subscribe_key: 'sub-c-c4a8d352-e17f-11e6-884c-0619f8945a4f',
+    publish_key: 'your keys here',
+    subscribe_key: 'your keys here',
     media: {
         audio: true,
         video: true
