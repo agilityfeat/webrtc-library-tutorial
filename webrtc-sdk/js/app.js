@@ -22,7 +22,7 @@ phone.ready(function () {
 })
 
 phone.camera.ready(function (video) {
-    console.log('Camera is ready', video)
+    console.log('Camera is ready')
     phone.$('call').append(video)
 })
 
@@ -37,7 +37,8 @@ phone.receive(function (session) {
         phone.$('call').appendChild(session.video)
     })
     session.ended(session => {
-        sessions.hangup()
+        session.hangup()
+        phone.$('call').removeChild(session.video)
         inputCallee.style.display = 'inline'
         btnCall.style.display = 'inline'
         btnHangup.style.display = 'none'
