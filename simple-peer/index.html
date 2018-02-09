@@ -7,15 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <title>Video Conference Application</title>
-
-  <link href="css/app.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
   <div id="login">
-    <input type="text" id="callee" placeholder="Room number?" />
-    <button id="btnCall">Join</button>
+    <input type="text" id="caller" placeholder="What is your name?"/>
+    <button id="btnLogin">Log in</button>
+    <span id="showUser" style="display:none"></span>
+    <input type="text" id="callee" placeholder="Who you gonna Call?" style="display:none"/>
+    <button id="btnCall" style="display:none">Join</button>
     <button id="btnHangup" style='display:none'>Hangup</button>
   </div>
 
